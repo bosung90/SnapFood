@@ -7,14 +7,14 @@
   IgnorableNamespaces="uap mp">
 
   <Identity
-    Name="044b7746-c2fa-4a69-a8e5-23469da07adc"
+    Name="9c78fa79-fcb0-4736-b9c8-45bbbdfa9362"
     Publisher="CN=Eric"
     Version="1.0.0.0" />
 
-  <mp:PhoneIdentity PhoneProductId="044b7746-c2fa-4a69-a8e5-23469da07adc" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
+  <mp:PhoneIdentity PhoneProductId="9c78fa79-fcb0-4736-b9c8-45bbbdfa9362" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
 
   <Properties>
-    <DisplayName>snapFood</DisplayName>
+    <DisplayName>SnapFood</DisplayName>
     <PublisherDisplayName>Eric</PublisherDisplayName>
     <Logo>Assets\StoreLogo.png</Logo>
   </Properties>
@@ -30,12 +30,12 @@
   <Applications>
     <Application Id="App"
       Executable="$targetnametoken$.exe"
-      EntryPoint="snapFood.App">
+      EntryPoint="SnapFood.App">
       <uap:VisualElements
-        DisplayName="snapFood"
+        DisplayName="SnapFood"
         Square150x150Logo="Assets\Logo.png"
         Square44x44Logo="Assets\SmallLogo.png"
-        Description="snapFood"
+        Description="SnapFood"
         BackgroundColor="#464646">
         <uap:SplashScreen Image="Assets\SplashScreen.png" />
       </uap:VisualElements>
