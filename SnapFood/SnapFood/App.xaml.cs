@@ -27,7 +27,7 @@ namespace SnapFood
         /// <summary>
         /// Allows tracking page views, exceptions and other telemetry through the Microsoft Application Insights service.
         /// </summary>
-        public static Microsoft.ApplicationInsights.TelemetryClient TelemetryClient;
+      //  public static Microsoft.ApplicationInsights.TelemetryClient TelemetryClient;
 
         /// <summary>
         /// Initializes the singleton application object.  This is the first line of authored code
@@ -35,7 +35,7 @@ namespace SnapFood
         /// </summary>
         public App()
         {
-            TelemetryClient = new Microsoft.ApplicationInsights.TelemetryClient();
+       //     TelemetryClient = new Microsoft.ApplicationInsights.TelemetryClient();
 
             this.InitializeComponent();
             this.Suspending += OnSuspending;
