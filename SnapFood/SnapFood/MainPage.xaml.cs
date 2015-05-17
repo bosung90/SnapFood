@@ -64,7 +64,7 @@ namespace SnapFood
         private async void BrowseButton_Click(object sender, RoutedEventArgs e)
         {
             // Clear previous returned file name, if it exists, between iterations of this scenario
-            FilePicker.Content = "";
+            //FilePicker.Content = "";
 
             FileOpenPicker openPicker = new FileOpenPicker();
             openPicker.ViewMode = PickerViewMode.Thumbnail;
@@ -76,11 +76,14 @@ namespace SnapFood
             if (file != null)
             {
                 // Application now has read/write access to the picked file
-                FilePicker.Content = file.Name;
+                //FilePicker.Content = file.Name;
+                StorageFile storage_file = await StorageFile.GetFileFromPathAsync(file.Path);
+
+                await UploadImage(storage_file);
             }
             else
             {
-                FilePicker.Content = "Operation cancelled.";
+                //FilePicker.Content = "Operation cancelled.";
             }
         }
 
