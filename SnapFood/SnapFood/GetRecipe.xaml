@@ -14,11 +14,12 @@
             <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
-        
+
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*" />
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
+        <Rectangle Fill="#ee7171" HorizontalAlignment="Left" Height="640" Stroke="Black" VerticalAlignment="Top" Width="360" Grid.ColumnSpan="2" Grid.RowSpan="2"/>
         <TextBox Grid.Row="0" Grid.Column="0" x:Name="textBox" HorizontalAlignment="Stretch" Text="tomato" VerticalAlignment="Top" />
         <Button Grid.Row="0" Grid.Column="1" x:Name="button" Content="Get Recipes" HorizontalAlignment="Stretch" VerticalAlignment="Top" Background="#33000000" Click="GetRecipeClick"/>
 
@@ -34,7 +35,7 @@
                         <Image Source="{Binding Image}"
                                Height="100" Width="100"
                                Stretch="Uniform"/>
-        
+
                         <TextBlock Text="{Binding Description}"
                                    FontSize="26"
                                    Foreground="Black"
@@ -44,5 +45,5 @@
             </ListView.ItemTemplate>
         </ListView>
     </Grid>
-    
+
 </Page>
