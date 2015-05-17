@@ -7,13 +7,13 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
 
-    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" HorizontalAlignment="Center" Width="360" Height="640" VerticalAlignment="Center">
+    <Grid Background="#FFAA00FF"  HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
-        <Rectangle Fill="#e071ee" Stroke="Black" HorizontalAlignment="Right" Width="360" Height="640" VerticalAlignment="Bottom" Grid.RowSpan="2"/>
-        <Button Grid.Row="0"  x:Name="getRecipesButton" Content="Get Recipes" HorizontalAlignment="Stretch" VerticalAlignment="Top" Background="#33000000" Click="GetRecipeClick"/>
+        <!--<Rectangle Fill="#e071ee" Stroke="Black" HorizontalAlignment="Right" Width="360" Height="640" VerticalAlignment="Bottom" Grid.RowSpan="2"/>-->
+        <Button Grid.Row="0" x:Name="getRecipesButton" Content="Get Recipes" HorizontalAlignment="Stretch" Background="#33000000" Click="GetRecipeClick" BorderThickness="0" Height="35"/>
 
         <ProgressRing x:Name="loadingRing" Grid.Row="1" IsActive="True" VerticalAlignment="Center"/>
 

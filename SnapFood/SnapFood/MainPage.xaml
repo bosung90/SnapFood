@@ -7,20 +7,20 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
 
-    <Grid Background="{ThemeResource AppBarBackgroundThemeBrush}">
+    <Grid Background="#FF00C853">
         <Grid.RowDefinitions>
             <RowDefinition Height="2*" />
             <RowDefinition Height="*" />
             <RowDefinition Height="*" />
             <RowDefinition Height="15*" />
-            <RowDefinition Height="*" />
+            <RowDefinition Height="1.5*" />
         </Grid.RowDefinitions>
-        <Rectangle Fill="#48aa57" Stroke="Black" Grid.RowSpan="5" Height="640" VerticalAlignment="Center" HorizontalAlignment="Center" Width="360"/>
+        <!--<Rectangle Fill="#48aa57" Stroke="Black" Grid.RowSpan="5" Height="640" VerticalAlignment="Center" HorizontalAlignment="Center" Width="360"/>-->
 
         <TextBlock Grid.Row="0" Text="SnapFood" HorizontalAlignment="Center" TextAlignment="Center" VerticalAlignment="Center" FontWeight="Bold" FontSize="48"/>
         <TextBlock Grid.Row="1" Text=" - Never let your food go to a waste!" />
         <TextBlock Grid.Row="2" Text=" - An ultimate cooking guide" />
-        <CaptureElement Grid.Row="3" x:Name="PreviewControl" Stretch="Uniform" HorizontalAlignment="Center" Width="360"/>
+        <CaptureElement Grid.Row="3" x:Name="PreviewControl" Stretch="Uniform" HorizontalAlignment="Center"/>
         <Button Grid.Row="3" x:Name="PhotoButton" HorizontalAlignment="Center" VerticalAlignment="Center" BorderThickness="0" Height="Auto" Width="Auto" Foreground="White" Background="#00000000" Tapped="PhotoButton_Tapped">
             <!--<StackPanel>
                 <Image Source="Assets/icons/camera3.png" Opacity="0.4" />
@@ -30,7 +30,7 @@
             </Viewbox>
         </Button>
         <ProgressRing x:Name="loadingRing" Grid.Row="3" IsActive="True" VerticalAlignment="Center"/>
-        <Button Grid.Row="4" x:Name="FilePicker" HorizontalAlignment="Center" HorizontalContentAlignment="Center" BorderThickness="0" Height="Auto" Width="360" Click="BrowseButton_Click">Browse File</Button>
+        <Button Grid.Row="4" x:Name="FilePicker" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" BorderThickness="0" VerticalAlignment="Stretch" Click="BrowseButton_Click" >Browse File</Button>
 
     </Grid>
 </Page>

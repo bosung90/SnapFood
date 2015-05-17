@@ -8,7 +8,7 @@
     mc:Ignorable="d"
     Name="rootPage">
 
-    <Grid Background="White" VerticalAlignment="Stretch">
+    <Grid VerticalAlignment="Stretch" Background="#FFFF6D00">
 
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
@@ -19,9 +19,9 @@
             <ColumnDefinition Width="*" />
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
-        <Rectangle Fill="#ee7171" HorizontalAlignment="Center" Height="640" Stroke="Black" VerticalAlignment="Center" Width="360" Grid.ColumnSpan="2" Grid.RowSpan="2"/>
-        <TextBox Grid.Row="0" Grid.Column="0" x:Name="textBox" HorizontalAlignment="Stretch" Text="tomato" VerticalAlignment="Top" />
-        <Button Grid.Row="0" Grid.Column="1" x:Name="button" Content="Get Recipes" HorizontalAlignment="Stretch" VerticalAlignment="Top" Background="#33000000" Click="GetRecipeClick"/>
+        <!--<Rectangle Fill="#ee7171" HorizontalAlignment="Center" Height="640" Stroke="Black" VerticalAlignment="Center" Width="360" Grid.ColumnSpan="2" Grid.RowSpan="2"/>-->
+        <TextBox Grid.Row="0" Grid.Column="0" x:Name="textBox" HorizontalAlignment="Stretch" Text="tomato" BorderThickness="0" Height="35"/>
+        <Button Grid.Row="0" Grid.Column="1" x:Name="button" Content="Get Recipes" HorizontalAlignment="Stretch" Background="#33000000" Height="35" Click="GetRecipeClick" BorderThickness="0"/>
 
         <ProgressRing x:Name="loadingRing" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" IsActive="True" VerticalAlignment="Center"/>
         <ListView IsItemClickEnabled="True"
