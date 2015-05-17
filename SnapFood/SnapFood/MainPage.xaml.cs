@@ -25,6 +25,7 @@ namespace SnapFood
         public MainPage()
         {
             this.InitializeComponent();
+            
         }
     }
 }

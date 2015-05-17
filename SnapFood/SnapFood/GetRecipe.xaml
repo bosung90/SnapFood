@@ -1,0 +1,48 @@
+﻿<Page
+    x:Class="SnapFood.GetRecipe"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:SnapFood"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Name="rootPage">
+
+    <Grid Background="White" VerticalAlignment="Stretch">
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        <TextBox Grid.Row="0" Grid.Column="0" x:Name="textBox" HorizontalAlignment="Stretch" Text="tomato" VerticalAlignment="Top" />
+        <Button Grid.Row="0" Grid.Column="1" x:Name="button" Content="Get Recipes" HorizontalAlignment="Stretch" VerticalAlignment="Top" Background="#33000000" Click="GetRecipeClick"/>
+
+        
+        <ListView IsItemClickEnabled="True"
+                  x:Name="myListview"
+                  Grid.Row="1"  Grid.Column="0" Grid.ColumnSpan="2" 
+                  ItemClick="ListView_ItemClick"
+                  >
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Orientation="Horizontal">
+                        <Image Source="{Binding Image}"
+                               Height="100" Width="100"
+                               Stretch="Uniform"/>
+        
+                        <TextBlock Text="{Binding Description}"
+                                   FontSize="26"
+                                   Foreground="Black"
+                                   Margin="50,0,0,0"/>
+                    </StackPanel>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+    </Grid>
+    
+</Page>
