@@ -28,8 +28,6 @@
             </Viewbox>
         </Button>
         <ProgressRing x:Name="loadingRing" Grid.Row="3" IsActive="True" VerticalAlignment="Center"/>
-
-
         <Button Grid.Row="4" x:Name="FilePicker" HorizontalAlignment="Center" HorizontalContentAlignment="Center" BorderThickness="0" Height="Auto" Width="360" Click="BrowseButton_Click">Browse File</Button>
 
     </Grid>
