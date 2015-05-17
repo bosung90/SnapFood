@@ -12,13 +12,7 @@
             <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
-
-
-
         <Rectangle Fill="#e071ee" Stroke="Black" HorizontalAlignment="Right" Width="360" Height="640" VerticalAlignment="Bottom" Grid.RowSpan="2"/>
-
-
-
         <Button Grid.Row="0"  x:Name="getRecipesButton" Content="Get Recipes" HorizontalAlignment="Stretch" VerticalAlignment="Top" Background="#33000000" Click="GetRecipeClick"/>
 
         <ProgressRing x:Name="loadingRing" Grid.Row="1" IsActive="True" VerticalAlignment="Center"/>
@@ -34,11 +28,6 @@
                                   Click="IngredientClick"
                                   Content="{Binding Description}"
                                />
-
-                        <!--<TextBlock Text="{Binding Descriptionxx}"
-                                   FontSize="26"
-                                   Foreground="Black"
-                                   Margin="50,0,0,0"/>-->
                     </StackPanel>
                 </DataTemplate>
             </ListView.ItemTemplate>
