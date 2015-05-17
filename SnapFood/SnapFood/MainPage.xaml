@@ -7,7 +7,28 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
 
-    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    <Grid Background="{ThemeResource AppBarBackgroundThemeBrush}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="2*" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="15*" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <TextBlock Grid.Row="0" Text="SnapFood" HorizontalAlignment="Center" TextAlignment="Center" VerticalAlignment="Center" FontWeight="Bold" FontSize="48"/>
+        <TextBlock Grid.Row="1" Text=" - Never let your food go to a waste!" />
+        <TextBlock Grid.Row="2" Text=" - An ultimate cooking guide" />
+        <CaptureElement Grid.Row="3" Name="PreviewControl" Stretch="Uniform"/>
+        <Button Grid.Row="3" x:Name="PhotoButton" HorizontalAlignment="Center" VerticalAlignment="Center" BorderThickness="0" Height="Auto" Width="Auto" Foreground="White" Background="#00000000" Tapped="PhotoButton_Tapped">
+            <!--<StackPanel>
+                <Image Source="Assets/icons/camera3.png" Opacity="0.4" />
+            </StackPanel>-->
+            <Viewbox Opacity="0.4">
+                <SymbolIcon Symbol="Camera"/>
+            </Viewbox>
+        </Button>
+
+        <Button Grid.Row="4" x:Name="FilePicker" HorizontalAlignment="Center" HorizontalContentAlignment="Center" BorderThickness="0" Height="Auto" Width="360" Click="BrowseButton_Click">Browse File</Button>
 
     </Grid>
 </Page>
