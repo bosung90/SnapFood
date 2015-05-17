@@ -17,22 +17,24 @@
         
         <Button Grid.Row="0"  x:Name="getRecipesButton" Content="Get Recipes" HorizontalAlignment="Stretch" VerticalAlignment="Top" Background="#33000000" Click="GetRecipeClick"/>
 
+        <ProgressRing x:Name="loadingRing" Grid.Row="1" IsActive="True" VerticalAlignment="Center"/>
 
         <ListView IsItemClickEnabled="True"
                   x:Name="ingredientListview"
-                  Grid.Row="1" 
-                  ItemClick="IngredientListView_ItemClick"
+                  Grid.Row="1"
                   >
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <StackPanel Orientation="Horizontal">
                         <CheckBox IsChecked="{Binding IngredientChecked}"
+                                  Click="IngredientClick"
+                                  Content="{Binding Description}"
                                />
 
-                        <TextBlock Text="{Binding Description}"
+                        <!--<TextBlock Text="{Binding Descriptionxx}"
                                    FontSize="26"
                                    Foreground="Black"
-                                   Margin="50,0,0,0"/>
+                                   Margin="50,0,0,0"/>-->
                     </StackPanel>
                 </DataTemplate>
             </ListView.ItemTemplate>

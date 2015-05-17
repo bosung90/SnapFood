@@ -38,17 +38,20 @@ namespace SnapFood
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
-            textBox.Text = (e.Parameter as string);
+            var ingredients = e.Parameter as List<string>;
+            textBox.Text = string.Join(",", ingredients.ToArray());
+            GetRecipeClick(null, null);
         }
 
         public async void GetRecipeClick(object sender, RoutedEventArgs e)
         {
+            loadingRing.IsActive = true;
+            items.Clear();
             string ingredients = textBox.Text;
             var url = "http://food2fork.com/api/search?key=" + apiKey + "&q=" + ingredients;
 
             HttpClient httpClient = new HttpClient();
             string responseBodyAsText;
-            
             
             HttpResponseMessage response = await httpClient.GetAsync(url);
             response.EnsureSuccessStatusCode();
@@ -57,7 +60,6 @@ namespace SnapFood
 
             // parse json
             RecipeCollection rc = JsonConvert.DeserializeObject<RecipeCollection>(result);
-
 
             // for each recipe, create a button that contains photo & recipe name
             foreach(Recipe r in rc.recipes)
@@ -73,20 +75,9 @@ namespace SnapFood
                 item.Description = name;
                 item.Uri = source_url;
                 items.Add(item);
-
             }
             myListview.ItemsSource = items;
-        }
-
-        private async void GetRecipeClickTwo(object sender, RoutedEventArgs e)
-        {
-            await Windows.System.Launcher.LaunchUriAsync(new Uri("http://hotmail.com"));
-        }
-
-        private async void Button_Click(object sender, RoutedEventArgs e)
-        {
-            await Windows.System.Launcher.LaunchUriAsync(new Uri("http://hotmail.com"));
-           
+            loadingRing.IsActive = false;
         }
 
         private async void ListView_ItemClick(object sender, ItemClickEventArgs e)
@@ -101,9 +92,10 @@ namespace SnapFood
         private BitmapImage _image;
         public BitmapImage Image
         {
-            get { return _image; }
-
-
+            get
+            {
+                return _image;
+            }
             set
             {
                 _image = value;
@@ -113,16 +105,15 @@ namespace SnapFood
         private string _description;
         public string Description
         {
-            get { return _description; }
-
-
+            get
+            {
+                return _description;
+            }
             set
             {
                 _description = value;
-                
             }
         }
-
         public string Uri;
 
         public event PropertyChangedEventHandler PropertyChanged;

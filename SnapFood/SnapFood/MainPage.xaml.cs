@@ -66,7 +66,7 @@ namespace SnapFood
         private async void BrowseButton_Click(object sender, RoutedEventArgs e)
         {
             // Clear previous returned file name, if it exists, between iterations of this scenario
-            //FilePicker.Content = "";
+            FilePicker.Content = "";
 
             FileOpenPicker openPicker = new FileOpenPicker();
             openPicker.ViewMode = PickerViewMode.Thumbnail;
@@ -78,14 +78,11 @@ namespace SnapFood
             if (file != null)
             {
                 // Application now has read/write access to the picked file
-                //FilePicker.Content = file.Name;
-                StorageFile storage_file = await StorageFile.GetFileFromPathAsync(file.Path);
-
-                await UploadImage(storage_file);
+                FilePicker.Content = file.Name;
             }
             else
             {
-                //FilePicker.Content = "Operation cancelled.";
+                FilePicker.Content = "Operation cancelled.";
             }
         }
 
@@ -239,7 +236,7 @@ namespace SnapFood
                         ingredients.Add(name);
                     }
                 }
-                this.Frame.Navigate(typeof(GetRecipe), string.Join(",", ingredients.ToArray()));
+                this.Frame.Navigate(typeof(FoodChoices), ingredients);
                 
             }
         }
@@ -266,16 +263,10 @@ namespace SnapFood
 
         private async void PhotoButton_Tapped(object sender, TappedRoutedEventArgs e)
         {
-            //string filePath = @"C:\Users\Eric\Pictures\SimplePhoto.jpeg";
-            //byte[] arr;
-            //using (MemoryStream ms = new MemoryStream())
-            //{
-            //    img.Save(ms, System.Drawing.Imaging.ImageFormat.Jpeg);
-            //    arr = ms.ToArray();
-            //}
+            loadingRing.IsActive = true;
 
-            //await UploadImage();
             await TakePhotoAsync();
+            loadingRing.IsActive = false;
         }
 
         //private async void VideoButton_Tapped(object sender, TappedRoutedEventArgs e)
@@ -327,6 +318,7 @@ namespace SnapFood
         /// <returns></returns>
         private async Task InitializeCameraAsync()
         {
+            loadingRing.IsActive = true;
             Debug.WriteLine("InitializeCameraAsync");
 
             if (_mediaCapture == null)
@@ -387,6 +379,7 @@ namespace SnapFood
                     UpdateCaptureControls();
                 }
             }
+            loadingRing.IsActive = false;
         }
 
         /// <summary>

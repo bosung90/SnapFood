@@ -25,17 +25,18 @@ namespace SnapFood
     public sealed partial class FoodChoices : Page
     {
         public ObservableCollection<ingredientDesc> items = new ObservableCollection<ingredientDesc>();
-        public List<string> ingredients = new List<string>();
+
+        public List<string> recipeQuery = new List<string>();
         
         public FoodChoices()
         {
             this.InitializeComponent();
+        }
 
-            ingredients.Add("onion");
-            ingredients.Add("tomato");
-            ingredients.Add("cookie");
-
-            foreach(string i in ingredients)
+        protected override void OnNavigatedTo(NavigationEventArgs e)
+        {
+            var ingredients = e.Parameter as List<string>;
+            foreach (string i in ingredients)
             {
                 ingredientDesc ingredientDescription = new ingredientDesc();
                 var isChecked = ingredientDescription.IngredientChecked;
@@ -43,28 +44,36 @@ namespace SnapFood
                 items.Add(ingredientDescription);
             }
             ingredientListview.ItemsSource = items;
+            loadingRing.IsActive = false;
         }
 
-        public async void GetRecipeClick(object sender, RoutedEventArgs e)
+        public void GetRecipeClick(object sender, RoutedEventArgs e)
         {
-
+            this.Frame.Navigate(typeof(GetRecipe), recipeQuery);
         }
 
-        private async void IngredientListView_ItemClick(object sender, ItemClickEventArgs e)
+        private void IngredientClick(object sender, RoutedEventArgs e)
         {
-
+            if((sender as CheckBox).IsChecked == true)
+            {
+                recipeQuery.Add((sender as CheckBox).Content.ToString());
+            }
+            else
+            {
+                recipeQuery.Remove((sender as CheckBox).Content.ToString());
+            }
         }
     }
-
 
     public class ingredientDesc : INotifyPropertyChanged
     {
         private bool _ingredientchecked;
         public bool IngredientChecked
         {
-            get { return _ingredientchecked; }
-
-
+            get
+            {
+                return _ingredientchecked;
+            }
             set
             {
                 _ingredientchecked = value;
@@ -74,17 +83,15 @@ namespace SnapFood
         private string _description;
         public string Description
         {
-            get { return _description; }
-
-
+            get
+            {
+                return _description;
+            }
             set
             {
                 _description = value;
-
             }
         }
-
-
 
         public event PropertyChangedEventHandler PropertyChanged;
     }
