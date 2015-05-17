@@ -36,6 +36,7 @@ using System.Text.RegularExpressions;
 using Microsoft.WindowsAzure.Storage.Auth;
 using Microsoft.WindowsAzure.Storage;
 using Microsoft.WindowsAzure.Storage.Blob;
+using System.Net;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x409
 
@@ -211,7 +212,8 @@ namespace SnapFood
 
             var client = new HttpClient();
 
-            HttpResponseMessage response = await client.GetAsync(@"http://bosung.info/snapfood/query_image.php?image_url=http%3A%2F%2Fportalvhdsq9mb4wm4df10b.blob.core.windows.net%2Fsnapfood%2FSimplePhoto.jpeg");
+            string imageLink = @"http://bosung.info/snapfood/query_image.php?image_url=" + "http://portalvhdsq9mb4wm4df10b.blob.core.windows.net/snapfood/" + file.Name;
+            HttpResponseMessage response = await client.GetAsync(imageLink);
 
             // Get the response content.
             HttpContent responseContent = response.Content;
@@ -246,17 +248,14 @@ namespace SnapFood
 
         private async void PhotoButton_Tapped(object sender, TappedRoutedEventArgs e)
         {
-            string filePath = @"C:\Users\Eric\Pictures\SimplePhoto.jpeg";
+            //string filePath = @"C:\Users\Eric\Pictures\SimplePhoto.jpeg";
             //byte[] arr;
             //using (MemoryStream ms = new MemoryStream())
             //{
             //    img.Save(ms, System.Drawing.Imaging.ImageFormat.Jpeg);
             //    arr = ms.ToArray();
             //}
-            StorageFile file = await StorageFile.GetFileFromPathAsync(filePath);
 
-
-            await UploadImage(file);
             //await UploadImage();
             await TakePhotoAsync();
         }
@@ -476,7 +475,11 @@ namespace SnapFood
 
                 var photoOrientation = ConvertOrientationToPhotoOrientation(GetCameraOrientation());
 
-                await ReencodeAndSavePhotoAsync(stream, photoOrientation);
+                string filePath = await ReencodeAndSavePhotoAsync(stream, photoOrientation);
+
+                StorageFile file = await StorageFile.GetFileFromPathAsync(filePath);
+
+                await UploadImage(file);
             }
             catch (Exception ex)
             {
@@ -709,13 +712,13 @@ namespace SnapFood
         /// <param name="stream">The photo stream</param>
         /// <param name="photoOrientation">The orientation metadata to apply to the photo</param>
         /// <returns></returns>
-        private static async Task ReencodeAndSavePhotoAsync(IRandomAccessStream stream, PhotoOrientation photoOrientation)
+        private static async Task<string> ReencodeAndSavePhotoAsync(IRandomAccessStream stream, PhotoOrientation photoOrientation)
         {
             using (var inputStream = stream)
             {
                 var decoder = await BitmapDecoder.CreateAsync(inputStream);
 
-                var file = await KnownFolders.PicturesLibrary.CreateFileAsync("SimplePhoto.jpeg", CreationCollisionOption.GenerateUniqueName);
+                var file = await KnownFolders.PicturesLibrary.CreateFileAsync(DateTime.Now.ToString("yyyyMMddHHmmssffff") + ".jpeg", CreationCollisionOption.GenerateUniqueName);
 
                 using (var outputStream = await file.OpenAsync(FileAccessMode.ReadWrite))
                 {
@@ -726,6 +729,8 @@ namespace SnapFood
                     await encoder.BitmapProperties.SetPropertiesAsync(properties);
                     await encoder.FlushAsync();
                 }
+
+                return file.Path;
             }
         }
 
