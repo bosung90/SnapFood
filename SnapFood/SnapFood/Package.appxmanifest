@@ -36,7 +36,7 @@
         Square150x150Logo="Assets\Logo.png"
         Square44x44Logo="Assets\SmallLogo.png"
         Description="SnapFood"
-        BackgroundColor="#464646">
+        BackgroundColor="#00a2e8">
         <uap:SplashScreen Image="Assets\SplashScreen.png" />
       </uap:VisualElements>
     </Application>
