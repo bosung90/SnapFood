@@ -36,6 +36,10 @@ namespace SnapFood
             this.InitializeComponent();
         }
 
+        protected override void OnNavigatedTo(NavigationEventArgs e)
+        {
+            textBox.Text = (e.Parameter as string);
+        }
 
         public async void GetRecipeClick(object sender, RoutedEventArgs e)
         {

@@ -37,6 +37,8 @@ using Microsoft.WindowsAzure.Storage.Auth;
 using Microsoft.WindowsAzure.Storage;
 using Microsoft.WindowsAzure.Storage.Blob;
 using System.Net;
+using Newtonsoft.Json;
+using Windows.UI.Xaml.Markup;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x409
 
@@ -223,6 +225,19 @@ namespace SnapFood
             {
                 // Write the output.
                 string jsonString = await reader.ReadToEndAsync();
+                FoodRecognition fr = JsonConvert.DeserializeObject<FoodRecognition>(jsonString);
+                List<string> ingredients = new List<string>();
+                foreach(Result r in fr.results)
+                {
+                    var allTags = r.tags;
+                    foreach(Tag t in allTags)
+                    {
+                        var name = t.tag;
+                        ingredients.Add(name);
+                    }
+                }
+                this.Frame.Navigate(typeof(GetRecipe), string.Join(",", ingredients.ToArray()));
+                
             }
         }
 

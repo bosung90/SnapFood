@@ -94,6 +94,7 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="FoodRecognition.cs" />
     <Compile Include="GetRecipe.xaml.cs">
       <DependentUpon>GetRecipe.xaml</DependentUpon>
     </Compile>
@@ -103,6 +104,8 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Recipe.cs" />
     <Compile Include="RecipeCollection.cs" />
+    <Compile Include="Result.cs" />
+    <Compile Include="Tag.cs" />
   </ItemGroup>
   <ItemGroup>
     <AppxManifest Include="Package.appxmanifest">
