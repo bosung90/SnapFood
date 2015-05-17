@@ -49,8 +49,6 @@ namespace SnapFood
     /// </summary>
     public sealed partial class MainPage : Page
     {
-
-
         public MainPage()
         {
             this.InitializeComponent();
@@ -66,7 +64,7 @@ namespace SnapFood
         private async void BrowseButton_Click(object sender, RoutedEventArgs e)
         {
             // Clear previous returned file name, if it exists, between iterations of this scenario
-            FilePicker.Content = "";
+            //FilePicker.Content = "";
 
             FileOpenPicker openPicker = new FileOpenPicker();
             openPicker.ViewMode = PickerViewMode.Thumbnail;
@@ -78,11 +76,13 @@ namespace SnapFood
             if (file != null)
             {
                 // Application now has read/write access to the picked file
-                FilePicker.Content = file.Name;
+                //FilePicker.Content = file.Name;
+                StorageFile storage_file = await StorageFile.GetFileFromPathAsync(file.Path);
+                await UploadImage(storage_file);
             }
             else
             {
-                FilePicker.Content = "Operation cancelled.";
+                //FilePicker.Content = "Operation cancelled.";
             }
         }
 
@@ -240,26 +240,6 @@ namespace SnapFood
                 
             }
         }
-
-
-        //private async Task<string> UploadImage(StorageFile file)
-        //{
-        //    HttpClient client = new HttpClient();
-        //    client.BaseAddress = new Uri("http://bosung.info/snapfood/");
-        //    MultipartFormDataContent form = new MultipartFormDataContent();
-        //    HttpContent content = new StringContent("Choose File");
-        //    form.Add(content, "fileToUpload");
-        //    var stream = await file.OpenStreamForReadAsync();
-        //    content = new StreamContent(stream);
-        //    content.Headers.ContentDisposition = new ContentDispositionHeaderValue("form-data")
-        //    {
-        //        Name = "fileToUpload",
-        //        FileName = file.Name
-        //    };
-        //    form.Add(content);
-        //    var response = await client.PostAsync("upload.php", form);
-        //    return response.Content.ReadAsStringAsync().Result;
-        //}
 
         private async void PhotoButton_Tapped(object sender, TappedRoutedEventArgs e)
         {
@@ -889,44 +869,5 @@ namespace SnapFood
         }
 
         #endregion Rotation helpers
-
-        //private async Task<string> UploadImage(StorageFile file)
-        //{
-        //    HttpClient client = new HttpClient();
-        //    client.BaseAddress = new Uri("http://bosung.info/snapfood/");
-        //    MultipartFormDataContent form = new MultipartFormDataContent();
-        //    HttpContent content = new StringContent("fileToUpload");
-        //    form.Add(content, "fileToUpload");
-        //    var stream = await file.OpenStreamForReadAsync();
-        //    content = new StreamContent(stream);
-        //    content.Headers.ContentDisposition = new ContentDispositionHeaderValue("attachment")
-        //    {
-        //        Name = "fileToUpload",
-        //        FileName = file.Name
-        //    };
-        //    form.Add(content);
-        //    var response = await client.PostAsync("upload.php", form);
-        //    return response.Content.ReadAsStringAsync().Result;
-        //}
-        public static async Task<string> Upload(byte[] image)
-        {
-            using (var client = new HttpClient())
-            {
-                using (var content =
-                    new MultipartFormDataContent("Upload----" + DateTime.Now.ToString(CultureInfo.InvariantCulture)))
-                {
-                    content.Add(new StreamContent(new MemoryStream(image)), "bilddatei", "upload.jpg");
-
-                    using (
-                       var message =
-                           await client.PostAsync("http://www.directupload.net/index.php?mode=upload", content))
-                    {
-                        var input = await message.Content.ReadAsStringAsync();
-
-                        return !string.IsNullOrWhiteSpace(input) ? Regex.Match(input, @"http://\w*\.directupload\.net/images/\d*/\w*\.[a-z]{3}").Value : null;
-                    }
-                }
-            }
-        }
     }
 }
